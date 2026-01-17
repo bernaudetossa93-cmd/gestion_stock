@@ -1,0 +1,36 @@
+{% extends 'stock/base.html' %}
+{% block contenu %}
+<div class="card">
+<h2>■ Tableau de bord</h2>
+<div class="stats-grid"><div class="stat-box">
+<span class="stat-value">{{ stats.total_produits }}</span>
+<span class="stat-label">Produits différents</span>
+</div>
+<div class="stat-box">
+<span class="stat-value">{{ stats.total_articles }}</span>
+<span class="stat-label">Articles en stock</span>
+</div>
+<div class="stat-box">
+<span class="stat-value">{{ stats.valeur_stock|floatformat:2 }} €</span>
+<span class="stat-label">Valeur totale</span>
+</div>
+<div class="stat-box">
+<span class="stat-value">{{ stats.produits_stock_bas }}</span>
+<span class="stat-label">Stock bas</span>
+</div>
+</div>
+</div>
+<div class="card">
+<h2>Par catégorie</h2>
+<table>
+<tr><th>Catégorie</th><th>Produits</th><th>Quantité</th></tr>
+{% for cat in stats.par_categorie %}
+<tr>
+<td>{{ cat.categorie }}</td>
+<td>{{ cat.count }}</td>
+<td>{{ cat.total_quantite }}</td>
+</tr>
+{% endfor %}
+</table>
+</div>
+{% endblock %}

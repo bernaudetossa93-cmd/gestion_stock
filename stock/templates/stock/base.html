@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>{% block titre %}Gestion de Stock{% endblock %}</title>
+<style>
+body { font-family: Arial, sans-serif; background: #f5f5f5; }
+.container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+header { background: #2c3e50; color: white; padding: 20px; }
+nav a { color: white; margin-right: 15px; }
+.card { background: white; padding: 20px; border-radius: 8px; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 12px; border-bottom: 1px solid #ddd; }
+th { background: #34495e; color: white; }
+.btn { padding: 8px 16px; border: none; border-radius: 4px; }
+.btn-primary { background: #3498db; color: white; }
+.btn-danger { background: #e74c3c; color: white; }
+.stock-bas { background: #ffebee; color: #c62828; }
+</style>
+</head>
+<body>
+<header>
+<div class="container">
+<h1>Gestion de Stock</h1>
+<nav>
+<a href="{% url 'liste_produits' %}">Produits</a>
+<a href="{% url 'ajouter_produit' %}">Ajouter</a>
+<a href="{% url 'statistiques' %}">Statistiques</a>
+</nav>
+</div>
+</header>
+<div class="container">
+{% block contenu %}{% endblock %}
+</div>
+</body>
+</html>

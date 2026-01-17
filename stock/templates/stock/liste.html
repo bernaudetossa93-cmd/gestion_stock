@@ -1,0 +1,56 @@
+{% extends 'stock/base.html' %}
+{% block titre %}Liste des produits{% endblock %}
+{% block contenu %}
+<div class="card">
+<h2>Liste des produits</h2>
+<form method="get" class="search-form">
+<input type="text" name="recherche" value="{{ recherche }}"
+placeholder="Rechercher...">
+<select name="categorie">
+<option value="">Toutes les catégories</option>
+{% for cat in categories %}
+<option value="{{ cat }}"
+{% if cat == categorie_selectionnee %}selected{% endif %}>
+{{ cat }}
+</option>
+{% endfor %}
+</select>
+<button type="submit" class="btn btn-primary">Filtrer</button>
+<a href="{% url 'liste_produits' %}" class="btn">Réinitialiser</a>
+</form>
+{% if produits %}
+<table>
+<thead>
+<tr>
+<th>Nom</th>
+<th>Catégorie</th>
+<th>Quantité</th>
+<th>Prix</th>
+<th>Valeur</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+{% for produit in produits %}
+<tr class="{% if produit.stock_bas %}stock-bas{% endif %}">
+<td>{{ produit.nom }}</td>
+<td>{{ produit.categorie }}</td>
+<td>{{ produit.quantite }}</td>
+<td>{{ produit.prix }} €</td>
+<td>{{ produit.valeur_stock }} €</td>
+<td>
+<a href="{% url 'modifier_produit' produit.pk %}" class="btn btn-primary">Modifier</a>
+<a href="{% url 'supprimer_produit' produit.pk %}" class="btn btn-danger">Supprimer</a>
+<a href="{% url 'ajuster_stock' produit.pk 'moins' %}">■</a>
+{{ produit.quantite }}
+<a href="{% url 'ajuster_stock' produit.pk 'plus' %}">■</a>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
+<p>Aucun produit en stock.</p>
+{% endif %}
+</div>
+{% endblock %}
